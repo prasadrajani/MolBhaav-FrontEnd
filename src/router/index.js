@@ -4,8 +4,9 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Signin from '@/components/users/SignIn'
 import Signup from '@/components/users/signup'
-import Myprofile from '@/components/users/profile'
+// import Myprofile from '@/components/users/profile'
 import ProductList from '@/components/products/productlist'
+import profileedit from '@/components/users/profileedit'
 
 Vue.use(Router)
 
@@ -28,15 +29,16 @@ export default new Router({
       component: Signup
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: Myprofile
-    },
-    {
       path: '/productlist',
       name: 'productlist',
       component: ProductList
     },
+    {
+      path: '/profileedit',
+      name: 'profiledit',
+      component: profileedit
+    },
+
     { path: '*', redirect: '/' }
   ]
 })

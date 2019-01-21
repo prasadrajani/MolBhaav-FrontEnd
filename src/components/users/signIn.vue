@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <router-link></router-link>
+  <div>
   <v-container>
     <v-layout row align-center justify-center class="mt-5">
 
