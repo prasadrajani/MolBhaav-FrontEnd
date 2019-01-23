@@ -12,6 +12,9 @@ import carthistory from '@/components/products/carthistory'
 import orderhistory from '@/components/products/orderhistory'
 import Homeview from '@/pages/home'
 import Logout from '@/components/users/logout'
+// import Myprofile from '@/components/users/profile'
+import profileedit from '@/components/users/profileedit'
+
 Vue.use(Router)
 
 export default new Router({
@@ -72,6 +75,12 @@ export default new Router({
       name: 'logout',
       component: Logout
     },
+    {
+      path: '/profileedit',
+      name: 'profiledit',
+      component: profileedit
+    },
+
     { path: '*', redirect: '/' }
   ]
 })
