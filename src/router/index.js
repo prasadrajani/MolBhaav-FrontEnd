@@ -4,9 +4,14 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Signin from '@/components/users/SignIn'
 import Signup from '@/components/users/signup'
-import Myprofile from '@/components/users/profile'
-import ProductList from '@/components/products/productlist'
-
+import Myprofile from '@/components/users/editprofile'
+import productlist from '@/components/products/productlist'
+import ProductDescription from '@/components/products/productDescription'
+import Cartchart from '@/components/products/cartchart'
+import carthistory from '@/components/products/carthistory'
+import orderhistory from '@/components/products/orderhistory'
+import Homeview from '@/pages/home'
+import Logout from '@/components/users/logout'
 Vue.use(Router)
 
 export default new Router({
@@ -16,6 +21,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/home',
+      name: 'Homeview',
+      component: Homeview
     },
     {
       path: '/Signin',
@@ -28,14 +38,39 @@ export default new Router({
       component: Signup
     },
     {
-      path: '/profile',
-      name: 'profile',
+      path: '/editprofile/:id',
+      name: 'editprofile',
       component: Myprofile
     },
     {
-      path: '/productlist',
+      path: '/productlist/:cid',
       name: 'productlist',
-      component: ProductList
+      component: productlist
+    },
+    {
+      path: '/productDescription/:pid',
+      name: 'productDescription',
+      component: ProductDescription
+    },
+    {
+      path: '/cartchart/:id',
+      name: 'cartchart',
+      component: Cartchart
+    },
+    {
+      path: '/carthistory/:id',
+      name: 'carthisstory',
+      component: carthistory
+    },
+    {
+      path: '/orderhistory/:id',
+      name: 'orderhistory',
+      component: orderhistory
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
     },
     { path: '*', redirect: '/' }
   ]

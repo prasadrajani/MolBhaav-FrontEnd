@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <router-link></router-link>
+  <div>
   <v-container>
     <v-layout row align-center justify-center class="mt-5">
 
@@ -11,13 +10,13 @@
               <h2>Login</h2>
             </v-card-title>
             <v-form>
-            <v-text-field prepend-icon="person" name="Username" label="Username"></v-text-field>
-            <v-text-field prepend-icon="lock" name="Password" label="Password" type="password"></v-text-field>
+            <v-text-field prepend-icon="person" name ="Username" label="Username" v-model="emailId"></v-text-field>
+            <v-text-field prepend-icon="lock" label="Password" name="password" type="password" v-model="password"></v-text-field>
             <v-card-actions>
-              <v-btn dark primary large block>Login</v-btn>
+              <v-btn dark primary large block @click="Login">Login</v-btn>
             </v-card-actions>
             </v-form>
-          </v-card>
+            </v-card>
         </v-container>
       </v-flex>
     </v-layout>
@@ -26,8 +25,29 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
+import axios from 'axios'
 export default {
-    name: "Signin"
-}
+  name: "Signin",
+  data () {
+    return {
+        emailId: "",
+        password: "",
+    }
+  },
+  methods: {
+    Login () {
+      // this.postAuthData(this.authDetails)
+      // axios.post('http://allstore.herokuapp.com/users/login',
+      //   this.authDetails
+      this.$store.dispatch('loginMethod',{
+        emailId:this.emailId,
+        password:this.password
+      })
+    }
+  },
+  computed :{
+    ...mapGetters(['loginMethod'])
+  }
+ }
 </script>
-

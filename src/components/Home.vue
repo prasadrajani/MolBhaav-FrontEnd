@@ -1,88 +1,101 @@
 <template>
-  <div>
-    <v-container >
-      <v-layout row wrap class="mt-5">
-        <v-flex>
-        <v-carousel hide-delimiters>
-          <v-carousel-item
-            v-for="(item,i) in items"
-            :key="i"
-            :src="item.src">
-          </v-carousel-item>
-        </v-carousel>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="mt-3">
-      <h1>Mobiles</h1>
-      <v-layout row wrap >
-        <v-flex>
-        <v-carousel hide-delimiters>
-          <v-carousel-item
-            v-for="(mobile,i) in mobiles"
-            :key="i"
-            :src="mobile.src">
-          </v-carousel-item>
-        </v-carousel>
-        <v-btn route to='/productlist' target="-blank">View all</v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="mt-3">
-      <h1>Electronics</h1>
-      <v-layout row wrap >
-        <v-flex>
-        <v-carousel hide-delimiters>
-          <v-carousel-item
-            v-for="(Electronic,i) in Electronics"
-            :key="i"
-            :src="Electronic.src">
-          </v-carousel-item>
-        </v-carousel>
-        <v-btn >View all</v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+<div>
+
+  <v-carousel>
+    <v-carousel-item contain
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+
+    >
+    </v-carousel-item>
+  </v-carousel>
+
+  <v-container fluid grid-list-sm>
+    <v-layout>
+
+      <div v-for="category in products" :key="category.categoryId">
+      <v-flex xs50 sm7>
+        <v-img
+            :src=category.categoryImageUrl
+            height="350"
+            width="350"
+            contain
+        ></v-img>
+       <center>
+        <h3 class="headline mb-2">{{ category.categoryName }}</h3>
+        <router-link :to ="{name:'productlist',params:{cid:category.categoryId}}">
+        <v-btn dark> view all</v-btn></router-link>
+       </center>
+      </v-flex>
+      </div>
+
+    </v-layout>
+
+  </v-container>
+ </div>
+
+
 </template>
+
+
+
+
 <script>
-  export default {
-    data () {
-      return {
+ import Axios from 'axios'
+
+ export default {
+   name: 'productsList',
+
+   data() {
+     return {
+
         items: [
           {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+            src: 'static/shop.png'
+          },  
+          {
+            src: 'static/shop1.jpeg'
           },
           {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+            src: 'static/shop3.jpeg'
           },
           {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+            src: 'static/shop4.jpeg'
           },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-          }
         ],
-        mobiles:[
-          {
-            src: "static/Huaei.png"
-          },
-          {
-            src: "static/iphone6s.jpg"
-          },
-          {
-            src: "static/samsung.jpeg"
-          },
-          {
-            src: "static/Xiaomi.jpeg"
-          }
-        ],
-        Electronics:[
-          {
-             src : "static/Huaei.png"
-          }
-        ]
-      }
-    }
-  }
+
+      products: [
+
+            {
+               photo: ('https://picsum.photos/350/165?random'),
+               name: 'Product name',
+               usp:'Something somethin something'
+           }
+
+      ]
+
+     }
+   }
+     ,
+        created:function () {
+     console.log('hello')
+     Axios.get('http://molbhaav-product.herokuapp.com/category/')
+       .then((response) => {
+         this.products = response.data
+         console.log(this.products)
+       })
+       .catch((error) => {
+         console.log(error)
+       })
+   }
+ }
+
 </script>
+
+
+<style>
+   .padding_products{
+       margin-top: 180px
+   }
+</style>
