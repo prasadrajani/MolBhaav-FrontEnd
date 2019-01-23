@@ -1,46 +1,60 @@
 <template>
-  <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>
-      <v-card>
-        <v-card-title>
-          <span class="headline">User Profile</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container grid-list-md>
-            <v-layout wrap>
-              
-              <v-flex xs12 sm6 md4>
-                <v-text-field label="name" hint="example of helper text only on focus"></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-               
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Email*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field label="Password*" type="password" required></v-text-field>
-              </v-flex>
-              
-              
-            </v-layout>
-          </v-container>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-layout>
+  <div>
+  <v-container>
+    <v-layout row align-center justify-center class="mt-5">
+
+      <v-flex xs4 class="grey lighten-4">
+        <v-container style="position: relative;top: 13%;" class="text-xs-center">
+          <v-card flat>
+            <v-card-title primary-title>
+              <h2>Login</h2>
+            </v-card-title>
+            <v-form>
+            <v-text-field prepend-icon="lock" label="Email" name="email" v-model="details.emailId"></v-text-field>
+            <v-text-field prepend-icon="lock" label="Name" name="Name" v-model="details.name"></v-text-field>
+            <v-text-field prepend-icon="lock" label="Address" name="Address" v-model="details.address"></v-text-field>
+            <v-card-actions>
+              <v-btn dark primary large block @click="saveDetails">Save</v-btn>
+            </v-card-actions>
+            </v-form>
+          </v-card>
+        </v-container>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</div>
 </template>
 <script>
+import axios from 'axios'
   export default {
     data: () => ({
-      dialog: false
-    })
+      dialog: false,
+      details: {}
+    }),
+    methods: {
+        getDetails() {
+          axios.get('http://allstore.herokuapp.com/users/profile/2')
+          .then( (response) =>
+            this.details = response.data
+          )
+          .catch( (response) => 
+            console.log(response)
+          )
+        },
+        saveDetails() {
+          axios.post('http://allstore.herokuapp.com/users/editProfile',
+           this.details)
+          .then( (response) => 
+            console.log(response)
+          )
+          .catch( (response) =>
+            console.log(response)
+          )
+        }
+      },
+    mounted() {
+        this.getDetails()
+      }
   }
 </script>
+

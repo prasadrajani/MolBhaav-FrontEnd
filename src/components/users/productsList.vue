@@ -1,147 +1,62 @@
 <template>
 
-    <div class="container">
-    <router-view></router-view>
+   <div class="text-xs-center padding_products" >
+
+    
+     
+  <v-container fluid grid-list-sm>
+    <v-layout>
+      <div v-for="category in products" :key="category.productId">
+      <v-flex xs6 sm4>
+        <v-img
+          src="category.productImageUrl"
+          
+        ></v-img>
+        <h3 class="headline mb-0">{{ category.productName }}</h3>
+      </v-flex>
+      </div>
       
-    <div
-    id="e3"
-    style="max-width: 800px; margin: auto;" 
-    class="grey lighten-3"
-    >
+    </v-layout>
     
-    <v-layout></v-layout>
-    <v-card>
-    <v-container class="mt-7">
-      <v-layout>
-        <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text">
-              <v-layout>
-                <v-flex xs5>
-                  <v-img
-                    src= "static/Hauei.png"
-                    height="200px"
-                    contain
-                  ></v-img>
-                </v-flex>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <h1 class="display-3">Iphone 6S</h1>
-                      <div>PRICE RANGE:1000-20,000</div>
-                      <div></div>
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              <!-- <v-divider light></v-divider> -->
-              <v-card-actions class="pa-3">
-                <v-btn >shop now</v-btn>
-              </v-card-actions>
-              </v-layout>
-            </v-card>
-          </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="mt-7">
-      <v-layout>
-        <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text" height="200px">
-              <v-layout>
-                <v-flex xs5>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-                    height="200px"
-                    contain
-                  ></v-img>
-                </v-flex>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <h1 class="display-3">Iphone 6S</h1>
-                      <div>PRICE RANGE:1000-20,000</div>
-                     
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              <!-- <v-divider light></v-divider> -->
-              <v-card-actions class="pa-3">
-                <v-btn >shop now</v-btn>
-              </v-card-actions>
-              </v-layout>
-            </v-card>
-          </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="mt-7">
-      <v-layout>
-        <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text" height="200px">
-              <v-layout>
-                <v-flex xs5>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-                    height="200px"
-                    contain
-                  ></v-img>
-                </v-flex>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <h1 class="display-3">Iphone 6S</h1>
-                      <div>IPRICE RANGE:1000-20,000</div>
-                      
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              <!-- <v-divider light></v-divider> -->
-              <v-card-actions class="pa-3">
-                <v-btn >shop now</v-btn>
-              </v-card-actions>
-              </v-layout>
-            </v-card>
-          </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="mt-7">
-      <v-layout>
-        <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text" height="200px">
-              <v-layout>
-                <v-flex xs5>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-                    height="200px"
-                    contain
-                  ></v-img>
-                </v-flex>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <h1 class="display-3">Samsung</h1>
-                      <div>Price Range:1000-20,000</div>
-                     
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              <!-- <v-divider light></v-divider> -->
-              <v-card-actions class="pa-3">
-                <v-btn >shop now</v-btn>
-              </v-card-actions>
-              </v-layout>
-            </v-card>
-          </v-flex>
-      </v-layout>
-    </v-container>
-    </v-card>
-    </div>
-    </div>
-    
+  </v-container>
+  </div>
 
 </template>
-<script>
-export default {
-    name: 'productsList',
-   
-    
-  }
 
+<script>
+ import Axios from 'axios'
+ import StarRating from 'vue-star-rating'
+
+ export default {
+   name: 'productsList',
+
+   data() {
+     return {
+
+      products: []
+     }
+   }
+,
+   created: function () {
+     console.log('hello')
+     Axios.get('http://molbhaav-product.herokuapp.com/products/findByCategory/1')
+       .then((response) => {
+         this.products = response.data
+         console.log(this.products)
+       })
+       .catch((error) => {
+         console.log(error)
+       })
+   },
+ 
+ components: {
+   StarRating
+ }
+ }
 </script>
+
+<style>
+   .padding_products{
+       margin-top: 180px
+   }
+</style>

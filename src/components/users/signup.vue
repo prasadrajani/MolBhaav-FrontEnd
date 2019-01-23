@@ -1,5 +1,8 @@
 
 <template>
+<v-card-media src="../assets/logo.png">
+
+
   <div>
     <v-container fluid >
         <v-layout align-center justify-center class="mt-5">
@@ -27,12 +30,14 @@
         </v-layout>
       </v-container>
   </div>
+  </v-card-media>
 </template>
 
 
 <script>
   import {mapGetters,mapActions} from 'vuex'
   import axios from 'axios'
+
   export default {
   name: 'SingUpPage',
   data () {
@@ -42,8 +47,10 @@
       emailId : '',
       password : '',
       address:'',
+
+        },
+       // ran: 'VSKJHSV'
         }
-    }
   },
    methods: {
     ...mapActions(['signup']),
@@ -52,15 +59,30 @@
             this.details
         )
         .then((response)=>
-            console.log(response)
+           this.$router.push('/signIn')
         )
-        .catch((response)=>
-            console.log(response)
+        .catch((response)=> {
+     console.log('f')
+        }
         )
-     
     },
+    /*met(){
+       axios.post("http://10.177.7.118:8080/product/random?",
+            this.ran
+       )
+       .then( (response) => 
+       console.log(response))
+       .catch( (response) => 
+       console.log(response))
+
+    }*/
   },
+
   
   }
 
 </script>
+
+
+
+

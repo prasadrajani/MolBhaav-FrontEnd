@@ -1,44 +1,61 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
-import Home from '@/components/Home'
-import Signin from '@/components/users/SignIn'
-import Signup from '@/components/users/signup'
-// import Myprofile from '@/components/users/profile'
-import ProductList from '@/components/products/productlist'
-import profileedit from '@/components/users/profileedit'
 
+import productsList from '@/components/users/productsList'
+import productDescription from '@/components/products/productDescription'
+import signup from '@/components/users/signup'
+import home from '@/components/users/home'
+import signIn from '@/components/users/signIn'
+import orderhistory from '@/components/products/orderhistory'
+//mport navigation from '@/components/products/navigation'
+//import profileedit from '@/components/users/profileedit'
+import cart from '@/components/users/cart'
+import ratings from '@/components/users/ratings'
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'Home',
-      component: Home
+      path: '/productsList',
+      name: 'productsList',
+      component: productsList
     },
     {
-      path: '/Signin',
-      name: 'Signin',
-      component: Signin
+      path: '/orderhistory',
+      name: 'orderhistory',
+      component: orderhistory
+    },
+    {
+      path: '/productDescription/:productId',
+      name: 'productDescription',
+      component: productDescription
     },
     {
       path: '/signup',
       name: 'signup',
-      component: Signup
+      component: signup
     },
     {
-      path: '/productlist',
-      name: 'productlist',
-      component: ProductList
+      path: '/signIn',
+      name: 'signIn',
+      component: signIn
     },
     {
-      path: '/profileedit',
-      name: 'profiledit',
-      component: profileedit
+      path: '/home',
+      name: 'home',
+      component: home
     },
-
-    { path: '*', redirect: '/' }
+    {
+      path: '/cart',
+      name: 'cart',
+      component: cart
+    },
+    {
+      path: '/ratings',
+      name: 'ratings',
+      component: ratings
+    }
   ]
 })

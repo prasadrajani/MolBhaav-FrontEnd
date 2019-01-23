@@ -1,88 +1,69 @@
 <template>
-  <div>
-    <v-container >
-      <v-layout row wrap class="mt-5">
-        <v-flex>
-        <v-carousel hide-delimiters>
-          <v-carousel-item
-            v-for="(item,i) in items"
-            :key="i"
-            :src="item.src">
-          </v-carousel-item>
-        </v-carousel>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="mt-3">
-      <h1>Mobiles</h1>
-      <v-layout row wrap >
-        <v-flex>
-        <v-carousel hide-delimiters>
-          <v-carousel-item
-            v-for="(mobile,i) in mobiles"
-            :key="i"
-            :src="mobile.src">
-          </v-carousel-item>
-        </v-carousel>
-        <v-btn route to='/productlist' target="-blank">View all</v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-container class="mt-3">
-      <h1>Electronics</h1>
-      <v-layout row wrap >
-        <v-flex>
-        <v-carousel hide-delimiters>
-          <v-carousel-item
-            v-for="(Electronic,i) in Electronics"
-            :key="i"
-            :src="Electronic.src">
-          </v-carousel-item>
-        </v-carousel>
-        <v-btn >View all</v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+  <v-container fluid grid-list-sm>
+    <v-layout>
+      <div v-for="merchant in product.merchants" :key="merchant.name">
+      <v-flex xs6 sm4>
+        <v-img
+          src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+          gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+        ></v-img>
+      </v-flex>
+
+      <v-flex xs6 sm4>
+        <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+          <div class="fill-height bottom-gradient"></div>
+        </v-img>
+      </v-flex>
+
+      <v-flex xs6 sm4>
+        <v-img src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+          <div class="fill-height repeating-gradient"></div>
+        </v-img>
+      </v-flex>
+      </div>
+    </v-layout>
+    
+  </v-container>
 </template>
+      
+
+
+
 <script>
-  export default {
-    data () {
-      return {
-        items: [
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-          }
-        ],
-        mobiles:[
-          {
-            src: "static/Huaei.png"
-          },
-          {
-            src: "static/iphone6s.jpg"
-          },
-          {
-            src: "static/samsung.jpeg"
-          },
-          {
-            src: "static/Xiaomi.jpeg"
-          }
-        ],
-        Electronics:[
-          {
-             src : "static/Huaei.png"
-          }
-        ]
-      }
-    }
-  }
+ import Axios from 'axios'
+
+ export default {
+   name: 'productsList',
+
+   data() {
+     return {
+
+      products: [
+           {
+               photo: ('https://picsum.photos/350/165?random'),
+               name: 'Product name',
+               usp:'Something somethin something'
+           }
+      ]
+     }
+   }
+,
+   created: function () {
+     console.log('hello')
+     Axios.get('http://molbhaav-product.herokuapp.com/products/findByCategory/1')
+       .then((response) => {
+         this.products = response.data
+         console.log(this.products)
+       })
+       .catch((error) => {
+         console.log(error)
+       })
+   }
+ }
 </script>
+
+<style>
+   .padding_products{
+       margin-top: 180px
+   }
+</style>

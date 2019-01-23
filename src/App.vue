@@ -10,12 +10,13 @@
       <v-flex xs12 sm6 md8>
           <v-text-field
             placeholder="Search"
+            v-model="query"
           ></v-text-field>
         </v-flex>
       <!-- <v-btn flat> -->
-        <v-btn icon>
-              <v-icon>search</v-icon>
-        </v-btn>
+       
+           
+     
       <!-- </v-btn> -->
       <v-btn flat router-link to="/">Home</v-btn>
       <v-btn flat router-link to="/signin" target="-blank">Sign-in</v-btn>
@@ -31,7 +32,19 @@
 
 <script>
 import Home from '@/components/Home'
+import Axios from 'axios';
   export default{
-    name: 'App'
+    name: 'App',
+    data() {
+      return{
+        query: ''
+      }
+    },
+   // methods: {
+     // search() {
+       // Axios.get('http://10.177.7.255:8080/product/query?queryText='+this.query)
+       // .then((response) => )
+     // }
+    //}
   }
 </script>>
