@@ -3,7 +3,8 @@ import router from '../../router'
 
 const state = {
   loginDetails: null,
-  signupMessage: ''
+  signupMessage: '',
+  query: ''
 }
 
 const mutations = {
@@ -18,6 +19,9 @@ const mutations = {
     else {
       router.push({name: 'Home'})
     }
+  },
+  QUERY: (state, value) => {
+    state.query = value
   }
 }
 
@@ -42,6 +46,9 @@ const actions = {
         commit('LOGIN_DETAILS', null)
       }
     )
+  },
+  performSearch ({commit}, data) {
+    commit('QUERY', data)
   }
 }
 
@@ -51,6 +58,9 @@ const getters = {
   },
   loginMethod: (state) => {
     return state.loginDetails
+  },
+  queryGetter: (state) => {
+    return state.query
   }
 }
 

@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container class="mt-5" height="500px">
       <v-layout>
         <v-flex xs12>

@@ -62,50 +62,7 @@
         }
         )
     },
-    /*met(){
-       axios.post("http://10.177.7.118:8080/product/random?",
-            this.ran
-       )
-       .then( (response) =>
-       console.log(response))
-       .catch( (response) =>
-       console.log(response))
-
-    }*/
-  },
-
-
-<script>
-  import {mapGetters,mapActions} from 'vuex'
-  import axios from 'axios'
-  export default {
-  name: 'SingUpPage',
-  data () {
-    return {
-        details:{
-      name : '',
-      emailId : '',
-      password : '',
-      address:'',
-        }
-    }
-  },
-   methods: {
-    ...mapActions(['signup']),
-    signup() {
-        axios.post("http://allstore.herokuapp.com/users/signIn",
-            this.details
-        )
-        .then((response)=>
-            console.log(response)
-        )
-        .catch((response)=>
-            console.log(response)
-        )
-
-    },
-  },
-
+  }
   }
 
 </script>
