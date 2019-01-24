@@ -35,8 +35,8 @@
       console.log(x)
     },
     placeorder(){
-   Axios.post('http://molbhaav-order.herokuapp.com/orders/placeOrder',
-    {params: sessionStorage.getItem('UserId')})
+      const config = { headers: {'Content-Type': 'application/json'} }
+   Axios.post('http://molbhaav-order.herokuapp.com/orders/placeOrder?userId,'+sessionStorage.getItem('UserId'))
    .then((response) => {
      console.log(response)
     })

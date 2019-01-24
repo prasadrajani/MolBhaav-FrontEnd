@@ -20,8 +20,6 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn dark @click="signup" >Sign-up</v-btn>
-
-
               </v-card-actions>
             </v-card>
           </v-flex>

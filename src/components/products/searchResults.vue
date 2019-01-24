@@ -1,6 +1,6 @@
 <template>
    <div class="text-xs-center padding_products" >
-
+       {{ results }}
        <div v-for="item in products" :key="item.productId">
            <v-layout>
                 <v-flex xs5>
@@ -32,7 +32,8 @@ import { mapGetters } from 'vuex';
    data() {
      return {
       products: null,
-      query: this.queryGetter
+      query: this.queryGetter,
+      results: 'Results'
      }
    },
    computed:{
@@ -49,6 +50,7 @@ import { mapGetters } from 'vuex';
          console.log(this.products)
        })
        .catch((error) => {
+           this.results = 'NO RESULTS FOUND'
          console.log(error)
        })
    }

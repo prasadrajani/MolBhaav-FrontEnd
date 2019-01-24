@@ -4,7 +4,8 @@ import router from '../../router'
 const state = {
   loginDetails: null,
   signupMessage: '',
-  query: ''
+  query: '',
+  loginMessage: ''
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
   },
   QUERY: (state, value) => {
     state.query = value
+  },
+  LOGIN_MESSAGE: (state, value) => {
+    state.loginMessage = value
   }
 }
 
@@ -45,6 +49,7 @@ const actions = {
       (error) => {
         console.log(error)
         commit('LOGIN_DETAILS', null)
+        commit('LOGIN_MESSAGE', error.body.message)
       }
     )
   },
@@ -54,7 +59,7 @@ const actions = {
 }
 
 const getters = {
-  signupMethod: (state) => {
+  signupMethodMessage: (state) => {
     return state.signupMessage
   },
   loginMethod: (state) => {
@@ -62,6 +67,9 @@ const getters = {
   },
   queryGetter: (state) => {
     return state.query
+  },
+  displayLoginError: (state) => {
+    return state.loginMessage
   }
 }
 

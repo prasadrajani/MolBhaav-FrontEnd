@@ -56,7 +56,7 @@ export default {
             return this.items
         },
         addToCartTotal(){
-            this.$root.$emit("message", "X")
+            this.$emit("message", "X")
         }
     }
 }
