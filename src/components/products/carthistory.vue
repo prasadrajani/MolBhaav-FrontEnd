@@ -1,38 +1,76 @@
 <template>
-<div>
-  <v-container class="mt-5" height="500px">
-      <v-layout>
-        <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text" height="300px">
-              <v-layout>
-                <v-flex xs5>
-                  <v-img
-                    src="static/iphone6s.jpg"
-                    height="300px"
-                    contain
-                  ></v-img>
-                </v-flex>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <h1 class="display-3">Iphone 6S</h1>
-                      <!-- <v-divider></v-divider> -->
-                      <div>Iphone 6s</div>
-
-                      <v-spacer></v-spacer>
-                      <p>This product is bought on 10/2/2018</p>
-                    </div>
-                  </v-card-title>
-                </v-flex>
-
-              <!-- <v-divider light></v-divider> -->
-              <v-card-actions class="pa-3">
-                <!-- <v-btn >Add to Cart</v-btn> -->
-              </v-card-actions>
-              </v-layout>
-            </v-card>
-          </v-flex>
-      </v-layout>
-    </v-container>
+  <div>
+  <v-container class="mt-5" height="100px">
+    <div v-for="product in products" :key="product.productId" class="mt-5">
+        <cart-item v-bind="product" v-on:message="addToTotal"></cart-item>
+    </div>
+  </v-container>
+  <button @click="saveToCart">SAVE TO CART</button>
   </div>
 </template>
+
+<script>
+ import Axios from 'axios'
+ import CartItem from '@/components/products/CartItem'
+ export default {
+   name: 'productsList',
+   data() {
+     return {
+       msg:"",
+       finalPrice:0,
+        products: []
+     }
+   },
+  components:{
+    CartItem
+  },
+  computed: {
+    num() {
+      return this.finalPrice
+    }
+  },
+  methods: {
+    addToTotal(x){
+      console.log(x)
+    },
+    saveToCart(){
+      var productsList= []
+      for(var i=0; i<this.products.length; i++){
+        productsList.push({
+          "merchantId": this.products[i].merchantId,
+          "price": this.products[i].price,
+          "productId": this.products[i].productId,
+          "quantity": this.products[i].quantity
+        });
+      }
+      var data = {
+        "productsList": productsList,
+        "userId": sessionStorage.getItem("UserId")
+      }
+      console.log(data)
+      Axios.post('http://demo9723651.mockable.io/test2', data)
+      //Axios.post('https://molbhaav-order.herokuapp.com/carts/saveCart', data)
+      .then((response) => {
+         this.products = response.data
+         console.log(this.products)
+       })
+       .catch((error) => {
+         console.log(error)
+       })
+    }
+  },
+   created: function() {
+     console.log('hello')
+     //Axios.get('http://demo2494511.mockable.io/testing')
+     Axios.get('http://molbhaav-order.herokuapp.com/carts/viewCart/5')
+       .then((response) => {
+         this.products = response.data
+         console.log(this.products)
+       })
+       .catch((error) => {
+         console.log(error)
+       })
+    }
+  }
+
+</script>
