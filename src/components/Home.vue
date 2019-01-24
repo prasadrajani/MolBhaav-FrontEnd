@@ -15,7 +15,7 @@
     <v-layout>
 
       <div v-for="category in products" :key="category.categoryId">
-      <v-flex xs50 sm7>
+      <v-flex xs12 md3>
         <v-img
             :src=category.categoryImageUrl
             height="350"

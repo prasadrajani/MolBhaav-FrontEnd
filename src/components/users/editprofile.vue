@@ -33,7 +33,7 @@ import axios from 'axios'
     }),
     methods: {
         getDetails() {
-          axios.get('http://allstore.herokuapp.com/users/profile/2')
+          axios.get('http://allstore.herokuapp.com/users/profile/'+sessionStorage.getItem('UserId'))
           .then( (response) =>
             this.details = response.data
           )

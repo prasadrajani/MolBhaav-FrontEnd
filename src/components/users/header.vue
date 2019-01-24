@@ -8,17 +8,18 @@
       <v-flex xs12 sm6 md8>
           <v-text-field
             placeholder="Search"
+            v-model="query"
           ></v-text-field>
         </v-flex>
       <!-- <v-btn flat> -->
-        <v-btn >
+        <v-btn @click="doSearch" router-link to="/searchResults" target="-blank">
               <v-icon>search</v-icon>
         </v-btn>
       <!-- </v-btn> -->
       <v-btn flat router-link to="/">Home</v-btn>
     </v-toolbar-items>
-    <v-toolbar-items v-if="loginMethod">
-      <v-btn flat router-link to="/cartchart" target="-blank">cart</v-btn>
+    <v-toolbar-items v-if="loginMethod">     
+      <v-btn router link to="/carthistory" target="-blank">cart</v-btn>      
       <v-menu transition="slide-x-transition">
       <v-btn slot="activator" dark  >{{loginMethod.name}}</v-btn>
       <v-list>
@@ -41,8 +42,19 @@
 import {mapGetters,mapActions} from 'vuex'
   export default{
     name:'header',
+    data() {
+      return{
+        query: ''
+      }
+    },
+    methods:{
+      ...mapActions(['performSearch']),
+      doSearch(){
+        this.performSearch(this.query)
+      }
+    },
     computed:{
-      ...mapGetters(['loginMethod'])
+      ...mapGetters(['loginMethod', 'queryGetter']),
     }
   }
 </script>

@@ -14,6 +14,7 @@ import Homeview from '@/pages/home'
 import Logout from '@/components/users/logout'
 // import Myprofile from '@/components/users/profile'
 import profileedit from '@/components/users/profileedit'
+import searchResults from '@/components/products/searchResults'
 
 Vue.use(Router)
 
@@ -61,12 +62,12 @@ export default new Router({
       component: Cartchart
     },
     {
-      path: '/carthistory/:id',
+      path: '/carthistory',
       name: 'carthisstory',
       component: carthistory
     },
     {
-      path: '/orderhistory/:id',
+      path: '/orderhistory',
       name: 'orderhistory',
       component: orderhistory
     },
@@ -80,7 +81,11 @@ export default new Router({
       name: 'profiledit',
       component: profileedit
     },
-
+    {
+      path: '/searchResults',
+      name: 'Search Results',
+      component: searchResults
+    },
     { path: '*', redirect: '/' }
   ]
 })

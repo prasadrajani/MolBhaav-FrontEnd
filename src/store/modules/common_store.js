@@ -3,7 +3,9 @@ import router from '../../router'
 
 const state = {
   loginDetails: null,
-  signupMessage: ''
+  signupMessage: '',
+  query: '',
+  loginMessage: ''
 }
 
 const mutations = {
@@ -18,6 +20,12 @@ const mutations = {
     else {
       router.push({name: 'Home'})
     }
+  },
+  QUERY: (state, value) => {
+    state.query = value
+  },
+  LOGIN_MESSAGE: (state, value) => {
+    state.loginMessage = value
   }
 }
 
@@ -36,21 +44,32 @@ const actions = {
     commonApi.postDataViaApi('/users/login', data,
       (response) => {
         commit('LOGIN_DETAILS', response.body)
+        sessionStorage.setItem('UserId', response.body.userId)
       },
       (error) => {
         console.log(error)
         commit('LOGIN_DETAILS', null)
+        commit('LOGIN_MESSAGE', error.body.message)
       }
     )
+  },
+  performSearch ({commit}, data) {
+    commit('QUERY', data)
   }
 }
 
 const getters = {
-  signupMethod: (state) => {
+  signupMethodMessage: (state) => {
     return state.signupMessage
   },
   loginMethod: (state) => {
     return state.loginDetails
+  },
+  queryGetter: (state) => {
+    return state.query
+  },
+  displayLoginError: (state) => {
+    return state.loginMessage
   }
 }
 

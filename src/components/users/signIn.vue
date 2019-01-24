@@ -13,6 +13,10 @@
             <v-text-field prepend-icon="person" name ="Username" label="Username" v-model="emailId"></v-text-field>
             <v-text-field prepend-icon="lock" label="Password" name="password" type="password" v-model="password"></v-text-field>
             <v-card-actions>
+              <v-card>
+              {{ displayLoginError }}
+              </v-card>
+              &nbsp;
               <v-btn dark primary large block @click="Login">Login</v-btn>
             </v-card-actions>
             </v-form>
@@ -47,7 +51,7 @@ export default {
     }
   },
   computed :{
-    ...mapGetters(['loginMethod'])
+    ...mapGetters(['loginMethod', 'displayLoginError']),
   }
  }
 </script>
