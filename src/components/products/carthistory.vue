@@ -6,6 +6,7 @@
     </div>
   </v-container>
   <button @click="saveToCart">SAVE TO CART</button>
+  <v-btn block color="secondary" dark  @click="placeorder" >place order</v-btn>
   </div>
 </template>
 
@@ -33,6 +34,16 @@
     addToTotal(x){
       console.log(x)
     },
+    placeorder(){
+   Axios.post('http://molbhaav-order.herokuapp.com/orders/placeOrder',
+    {params: sessionStorage.getItem('UserId')})
+   .then((response) => {
+     console.log(response)
+    })
+    .catch((error) => {
+     console.log(error)
+    })
+    },
     saveToCart(){
       var productsList= []
       for(var i=0; i<this.products.length; i++){
@@ -48,8 +59,8 @@
         "userId": sessionStorage.getItem("UserId")
       }
       console.log(data)
-      Axios.post('http://demo9723651.mockable.io/test2', data)
-      //Axios.post('https://molbhaav-order.herokuapp.com/carts/saveCart', data)
+      //Axios.post('http://demo9723651.mockable.io/test2', data)
+      Axios.post('http://molbhaav-order.herokuapp.com/carts/saveCart', data)
       .then((response) => {
          this.products = response.data
          console.log(this.products)
@@ -62,7 +73,7 @@
    created: function() {
      console.log('hello')
      //Axios.get('http://demo2494511.mockable.io/testing')
-     Axios.get('http://molbhaav-order.herokuapp.com/carts/viewCart/5')
+     Axios.get('http://molbhaav-order.herokuapp.com/carts/viewCart/'+sessionStorage.getItem('UserId'))
        .then((response) => {
          this.products = response.data
          console.log(this.products)

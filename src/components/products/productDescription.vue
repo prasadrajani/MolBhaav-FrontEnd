@@ -18,9 +18,6 @@
               </v-card-title>
             </v-flex>
             <!-- <v-divider light></v-divider> -->
-            <v-card-actions class="pa-3">
-              <v-btn>Add to Cart</v-btn>
-            </v-card-actions>
           </v-layout>
         </v-card>
       </v-flex>
@@ -28,7 +25,6 @@
   </v-container>
    <template v-if="products">
      <div>{{ products.productDescription }}</div>
-  <h1>Merchants List</h1>
   <div v-for="attribute in products.staticAttributeList" :key="attribute.attribute">
     <v-container class="mt-5" height="500px">
       <v-layout>
@@ -37,7 +33,7 @@
 
             <div>
 
-              <h2>Name: {{ attribute.attribute }}</h2>
+              <h2>{{ attribute.attribute }}</h2>
               <!-- <v-spacer></v-spacer> -->
             </div>
           </v-card-title>
@@ -45,25 +41,23 @@
         <v-flex xs7>
           <v-card-title primary-title>
 
-            <h2>Description {{ attribute.description }}</h2>
+            <h2>{{ attribute.description }}</h2>
           </v-card-title>
         </v-flex>
         <v-flex>
           <!-- <v-divider light></v-divider> -->
-          <v-card-actions class="pa-3">
-            <v-btn>Add to Cart</v-btn>
-          </v-card-actions>
         </v-flex>
       </v-layout>
     </v-container>
   </div>
+  <h1>Merchants List</h1>
   <div v-for="merchant in sortedArray" :key="merchant.merchantId">
     <v-container class="mt-5" height="500px">
       <v-layout>
         <v-flex xs7>
           <v-card-title primary-title>
             <div>
-              <h3>Name: {{ merchant.name }}</h3>
+              <h3>{{ merchant.name }}</h3>
               <!-- <v-spacer></v-spacer> -->
             </div>
           </v-card-title>
@@ -71,20 +65,20 @@
         <v-flex xs7>
           <v-card-title primary-title>
 
-            <h3>Price: Rs {{ merchant.price }}</h3>
+            <h3>{{ merchant.price }}</h3>
           </v-card-title>
         </v-flex>
         <v-flex xs7>
           <v-card-title primary-title>
 
-            <h3>Rating: {{ merchant.rating }}</h3>
+            <h3>{{ merchant.rating }}</h3>
           </v-card-title>
         </v-flex>
         <v-flex>
           <!-- <v-divider light></v-divider> -->
           <v-card-actions class="pa-3">
 
-              <v-btn @click="() => {saveDetails(merchant.merechantId)}"> Add to Cart</v-btn>
+              <v-btn @click="() => {saveDetails(merchant.merchantId)}"> Add to Cart</v-btn>
           </v-card-actions>
 
         </v-flex>
@@ -137,11 +131,12 @@ export default {
   },
   methods: {
     ...mapActions(['getDetails']),
-    saveDetails(merchantId) {
+    saveDetails(mId) {
       Axios.post("http://molbhaav-order.herokuapp.com/carts/add", {
-          userId: sessionStorage.getItem("UserId"),
-          merchantId: merchantId,
-          productId: this.products.productId
+          "userId": sessionStorage.getItem("UserId"),
+          "merchantId": mId,
+          "productId": this.products.productId,
+          "quantity": 1
         })
         .then((response) => {
           this.$store.commit('USER_DETAILS', response)

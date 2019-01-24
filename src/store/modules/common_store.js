@@ -40,6 +40,7 @@ const actions = {
     commonApi.postDataViaApi('/users/login', data,
       (response) => {
         commit('LOGIN_DETAILS', response.body)
+        sessionStorage.setItem('UserId', response.body.userId)
       },
       (error) => {
         console.log(error)

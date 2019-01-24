@@ -62,12 +62,12 @@ export default new Router({
       component: Cartchart
     },
     {
-      path: '/carthistory/:id',
+      path: '/carthistory',
       name: 'carthisstory',
       component: carthistory
     },
     {
-      path: '/orderhistory/:id',
+      path: '/orderhistory',
       name: 'orderhistory',
       component: orderhistory
     },

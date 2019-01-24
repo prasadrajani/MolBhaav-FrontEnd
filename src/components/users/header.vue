@@ -18,8 +18,8 @@
       <!-- </v-btn> -->
       <v-btn flat router-link to="/">Home</v-btn>
     </v-toolbar-items>
-    <v-toolbar-items v-if="loginMethod">
-      <v-btn flat router-link to="/cartchart" target="-blank">cart</v-btn>
+    <v-toolbar-items v-if="loginMethod">     
+      <v-btn router link to="/carthistory" target="-blank">cart</v-btn>      
       <v-menu transition="slide-x-transition">
       <v-btn slot="activator" dark  >{{loginMethod.name}}</v-btn>
       <v-list>

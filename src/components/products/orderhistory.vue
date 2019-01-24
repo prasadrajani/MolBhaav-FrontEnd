@@ -52,8 +52,8 @@
 ,
    created: function () {
      console.log('hello')
-     Axios.get('http://demo2494511.mockable.io/testing')
-     //Axios.get('http://molbhaav-order.herokuapp.com/orders/getOrderHistory/' + sessionStorage.getItem("UserId"))
+     //Axios.get('http://demo2494511.mockable.io/testing')
+     Axios.get('http://molbhaav-order.herokuapp.com/orders/orderHistory/' + sessionStorage.getItem("UserId"))
        .then((response) => {
          this.orders = response.data
          console.log(this.orders)
